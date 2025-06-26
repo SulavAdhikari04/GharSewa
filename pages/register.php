@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Database connection
 $conn = new mysqli("localhost", "root", "", "gharsewa");
 if ($conn->connect_error) {

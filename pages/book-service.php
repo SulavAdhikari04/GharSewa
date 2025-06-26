@@ -2,7 +2,13 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
+    header('Location: login.php');
+    exit();
+}
 $conn = new mysqli("localhost", "root", "", "gharsewa");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

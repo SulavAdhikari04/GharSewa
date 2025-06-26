@@ -1,5 +1,12 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// Auto-login using cookie
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
+    $_SESSION['user_id'] = $_COOKIE['user_id'];
+    // You may want to fetch and set other session variables from DB here
+}
 // Database connection
 $conn = new mysqli("localhost", "root", "", "gharsewa");
 if ($conn->connect_error) {
@@ -30,6 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $role;
+                // Remember Me
+                if (isset($_POST['remember'])) {
+                    setcookie('user_id', $id, time() + (86400 * 30), "/"); // 30 days
+                }
                 // Redirect based on role
                 if ($role === 'admin') {
                     header('Location: admin-dashboard.php');
@@ -76,6 +87,8 @@ $conn->close();
 
       <label for="login-password">Password:</label>
       <input type="password" id="login-password" name="password" placeholder="Enter password" required >
+
+      <label><input type="checkbox" name="remember"> Remember Me</label>
 
       <button type="submit">Login</button>
     </form>
