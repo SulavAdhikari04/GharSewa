@@ -11,15 +11,15 @@
     <p style="text-align:center;">Fast and reliable home service delivery — right where you live.</p>
     <div class="doorstep-cards">
       <div class="doorstep-card">
-        <img src="kathmandu.jpg" alt="Kathmandu">
+        <img src="artifacts/kathmandu.jpg" alt="Kathmandu">
         <h4>Kathmandu</h4>
       </div>
       <div class="doorstep-card">
-        <img src="lalitpur.jpg" alt="Lalitpur">
+        <img src="artifacts/lalitpur.jpg" alt="Lalitpur">
         <h4>Lalitpur</h4>
       </div>
       <div class="doorstep-card">
-        <img src="bhaktapur.jpg" alt="Bhaktapur">
+        <img src="artifacts/bhaktapur.jpg" alt="Bhaktapur">
         <h4>Bhaktapur</h4>
       </div>
     </div>
