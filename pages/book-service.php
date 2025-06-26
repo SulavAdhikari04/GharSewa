@@ -63,7 +63,7 @@ $conn->close();
 <head>
   <meta charset="UTF-8" />
   <title>Book a Service - GharSewa</title>
-  <link rel="stylesheet" href="booking-style.css" />
+  <link rel="stylesheet" href="../css/booking-style.css" />
 </head>
 <body>
   <a href="customer-home.php" class="text-logo">GharSewa</a>

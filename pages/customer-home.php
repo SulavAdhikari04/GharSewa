@@ -1,4 +1,30 @@
-<?php include '../components/Header.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>GharSewa - Home Services at Your Doorstep</title>
+  <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>GharSewa</h1>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#booking">Book Now</a>
+        <a href="#contact">Contact</a>
+        <div class="profile-menu">
+          <i class="fas fa-user-circle" id="profile-icon"></i>
+          <div class="dropdown-tray" id="profile-tray" style="display: none;">
+            <a href="customer-dashboard.php">Dashboard</a>
+            <a href="home.php">Logout</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
 
   <section class="hero">
     <h2>Reliable Home Services in Kathmandu</h2>
@@ -95,13 +121,66 @@
     </div>
   </section>
 
+
   <section class="testimonials">
     <h3>What Our Customers Say</h3>
     <div class="card">"Great service and quick response!" - Aayush</div>
     <div class="card">"Highly recommend GharSewa!" - Pratiksha</div>
   </section>
 
-<?php include '../components/Footer.php'; ?>
+  <footer id="contact" class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>GharSewa</h4>
+        <p>Reliable home services in Kathmandu, Lalitpur & Bhaktapur.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#booking">Book Now</a></li>
+          <li><a href="customer-dashboard.php">Dashboard</a></li>
+          <li><a href="home.php">Logout</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact Us</h4>
+        <p>Email: support@gharsewa.com</p>
+        <p>Phone: +977-9800000000</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 GharSewa. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    document.querySelector("form").addEventListener("submit", function (e) {
+      const name = document.getElementById("name").value.trim();
+      const service = document.getElementById("service").value;
+      const date = document.getElementById("date").value;
+      const address = document.getElementById("address").value.trim();
+
+      if (!name || !service || !date || !address) {
+        alert("Please fill in all fields before submitting.");
+        e.preventDefault(); // Prevent form submission
+        return;
+      }
+
+      const today = new Date().toISOString().split("T")[0];
+      if (date < today) {
+        alert("Please select a valid future date.");
+        e.preventDefault();
+        return;
+      }
+
+      alert("Form submitted successfully!");
+    });
+  </script>
 <script>
   const profileIcon = document.getElementById("profile-icon");
   const profileTray = document.getElementById("profile-tray");
@@ -117,5 +196,5 @@
     }
   });
 </script>
-
-</rewritten_file>
+</body>
+</html>

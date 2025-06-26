@@ -103,93 +103,126 @@ $stmt->close();
 
 $conn->close();
 ?>
-<?php include '../components/Header.php'; ?>
-<div class="layout">
-  <?php include '../components/SidebarCustomer.php'; ?>
-  <div class="main-content">
-    <header>
-      <h1>Welcome to Your Dashboard</h1>
-    </header>
-    <section id="overview">
-      <h2>Dashboard Overview</h2>
-      <div class="stats-grid">
-        <!-- Dynamically load stats here. Remove mock data. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Customer Dashboard - GharSewa</title>
+  <link rel="stylesheet" href="../css/customer-dashboard.css">
+</head>
+<body>
+  <div class="layout">
+    <div class="sidebar">
+      <a href="customer-home.php"> <h2>GharSewa</h2></a>
+      <nav>
+        <ul>
+          <li><a href="#overview">Dashboard</a></li>
+          <li><a href="#bookings">Bookings</a></li>
+          <li><a href="#notifications">Notifications</a></li>
+          <li><a href="#reviews">My Reviews</a></li>
+          <li><a href="#profile">Profile</a></li>
+        </ul>
+      </nav>
+      <div style="margin-top: 30px;">
+        <a href="index.html" class="logout-btn">Logout</a>
       </div>
-    </section>
-    <section id="bookings">
-      <h3>Booking History</h3>
-      <?php include '../components/Alert.php'; ?>
-      <?php if (empty($bookings)): ?>
-        <div class="no-bookings-message">
-          <p>No booking history found. You haven't made any bookings yet.</p>
-          <p style="font-size: 14px; margin-top: 10px; opacity: 0.8;">Start by exploring our services and making your first booking!</p>
+    </div>
+
+    <div class="main-content">
+      <header>
+        <h1>Welcome to Your Dashboard</h1>
+      </header>
+
+      <section id="overview">
+        <h2>Dashboard Overview</h2>
+        <div class="stats-grid">
+          <!-- Dynamically load stats here. Remove mock data. -->
         </div>
-      <?php else: ?>
-      <table>
-        <thead>
-          <tr><th>Service</th><th>Provider</th><th>Date</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          <?php foreach ($bookings as $booking): ?>
-            <tr>
-              <td><?= htmlspecialchars($booking['service_name']) ?></td>
-              <td><?= htmlspecialchars($booking['provider_name']) ?></td>
-              <td><?= htmlspecialchars($booking['service_date']) ?></td>
-              <td><?= htmlspecialchars($booking['status']) ?></td>
-            </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-      <?php endif; ?>
-    </section>
-    <section id="notifications">
-      <h3>Notifications</h3>
-      <table>
-        <thead>
-          <tr><th>Date</th><th>Message</th></tr>
-        </thead>
-        <tbody>
-          <!-- Dynamically load notifications here. Remove mock data. -->
-        </tbody>
-      </table>
-    </section>
-    <section id="reviews">
-      <h3>My Reviews</h3>
-      <table>
-        <thead>
-          <tr><th>Service</th><th>Provider</th><th>Rating</th><th>Comment</th></tr>
-        </thead>
-        <tbody>
-          <!-- Dynamically load reviews here. Remove mock data. -->
-        </tbody>
-      </table>
-    </section>
-    <section id="profile">
-      <h3>My Profile</h3>
-      <div id="profile-view">
-        <p><strong>Username:</strong> <span id="view-username"><?= htmlspecialchars($user_info['username']) ?></span></p>
-        <p><strong>Phone:</strong> <span id="view-phone"><?= htmlspecialchars($user_info['phone']) ?></span></p>
-        <?php if (!empty($profile['profile_picture'])): ?>
-          <img src="<?= htmlspecialchars($profile['profile_picture']) ?>" alt="Profile Picture" style="max-width:100px; border-radius:50%; margin-bottom:10px;">
+      </section>
+
+      <section id="bookings">
+        <h3>Booking History</h3>
+        <?php if (empty($bookings)): ?>
+          <div class="no-bookings-message">
+            <p>No booking history found. You haven't made any bookings yet.</p>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.8;">Start by exploring our services and making your first booking!</p>
+          </div>
+        <?php else: ?>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Provider</th><th>Date</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <?php foreach ($bookings as $booking): ?>
+              <tr>
+                <td><?= htmlspecialchars($booking['service_name']) ?></td>
+                <td><?= htmlspecialchars($booking['provider_name']) ?></td>
+                <td><?= htmlspecialchars($booking['service_date']) ?></td>
+                <td><?= htmlspecialchars($booking['status']) ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
         <?php endif; ?>
-        <p><strong>Address:</strong> <span id="view-address"><?= htmlspecialchars($profile['address']) ?></span></p>
-        <button id="edit-btn">Edit Profile</button>
-      </div>
-      <form id="profile-form" method="POST" enctype="multipart/form-data" style="display: none;">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="<?= htmlspecialchars($user_info['username']) ?>" required>
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($user_info['phone']) ?>" required>
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" value="<?= htmlspecialchars($profile['address']) ?>" required>
-        <label for="profile_picture">Profile Picture:</label>
-        <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
-        <button type="submit" name="save_profile">Save Changes</button>
-      </form>
-    </section>
+      </section>
+
+      <section id="notifications">
+        <h3>Notifications</h3>
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Message</th></tr>
+          </thead>
+          <tbody>
+            <!-- Dynamically load notifications here. Remove mock data. -->
+          </tbody>
+        </table>
+      </section>
+
+      <section id="reviews">
+        <h3>My Reviews</h3>
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Provider</th><th>Rating</th><th>Comment</th></tr>
+          </thead>
+          <tbody>
+            <!-- Dynamically load reviews here. Remove mock data. -->
+          </tbody>
+        </table>
+      </section>
+
+      <section id="profile">
+        <h3>My Profile</h3>
+        <div id="profile-view">
+          <p><strong>Username:</strong> <span id="view-username"><?= htmlspecialchars($user_info['username']) ?></span></p>
+          <p><strong>Phone:</strong> <span id="view-phone"><?= htmlspecialchars($user_info['phone']) ?></span></p>
+          <?php if (!empty($profile['profile_picture'])): ?>
+            <img src="<?= htmlspecialchars($profile['profile_picture']) ?>" alt="Profile Picture" style="max-width:100px; border-radius:50%; margin-bottom:10px;">
+          <?php endif; ?>
+          <p><strong>Address:</strong> <span id="view-address"><?= htmlspecialchars($profile['address']) ?></span></p>
+          <button id="edit-btn">Edit Profile</button>
+        </div>
+        <form id="profile-form" method="POST" enctype="multipart/form-data" style="display: none;">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" value="<?= htmlspecialchars($user_info['username']) ?>" required>
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($user_info['phone']) ?>" required>
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="address" value="<?= htmlspecialchars($profile['address']) ?>" required>
+          <label for="profile_picture">Profile Picture:</label>
+          <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+          <button type="submit" name="save_profile">Save Changes</button>
+        </form>
+      </section>
+    </div>
   </div>
-</div>
-<?php include '../components/Footer.php'; ?>
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2025 GharSewa. All rights reserved.</p>
+      <p>Need help? Contact <a href="mailto:support@gharsewa.com">support@gharsewa.com</a></p>
+    </div>
+  </footer>
+</body>
 <script>
 document.getElementById('edit-btn').addEventListener('click', () => {
   document.getElementById('profile-view').style.display = 'none';
@@ -201,5 +234,4 @@ document.getElementById('profile-form').addEventListener('submit', function(e) {
   // No need to prevent default or handle with JavaScript
 });
 </script>
-</body>
 </html>

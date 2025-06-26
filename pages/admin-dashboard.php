@@ -165,134 +165,152 @@ $total_services = $stats['total_services'];
 // Pending provider verifications (assuming a 'verifications' table or similar, else set to 0)
 $pending_verifications = 0;
 ?>
-<?php include '../components/HeaderAdmin.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - GharSewa</title>
+  <link rel="stylesheet" href="../css/admin-dashboard.css">
+</head>
 <body>
-  <div class="layout">
-    <?php include '../components/SidebarAdmin.php'; ?>
-    <div class="main-content">
-      <header>
-        <h1>Welcome to GharSewa Admin Dashboard</h1>
-      </header>
-      <?php include '../components/Alert.php'; ?>
-      <div class="container">
-      <h2>Dashboard Overview</h2>
-      <div class="stats-grid">
-        <div class="card">👤 Users<br><strong><?= $total_users ?></strong></div>
-        <div class="card">🧑‍🔧 Providers<br><strong><?= $total_providers ?></strong></div>
-        <div class="card">📦 Bookings<br><strong><?= $total_bookings ?></strong></div>
-        <div class="card">✅ Active Services<br><strong><?= $total_services ?></strong></div>
-        <div class="card">⏳ Pending Verifications<br><strong><?= $pending_verifications ?></strong></div>
-      </div>
-
-      <h3>User Management</h3>
-      <table>
-        <thead>
-          <tr><th>Username</th><th>Email</th><th>Role</th><th>Registered At</th></tr>
-        </thead>
-        <tbody>
-          <?php foreach ($users as $user): ?>
-          <tr>
-            <td><?= htmlspecialchars($user['username']) ?></td>
-            <td><?= htmlspecialchars($user['email']) ?></td>
-            <td><?= htmlspecialchars($user['role']) ?></td>
-            <td><?= htmlspecialchars($user['created_at']) ?></td>
-          </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-
-      <h3>Provider Verifications</h3>
-      <table>
-        <thead>
-          <tr><th>Name</th><th>Documents</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          <!-- Dynamically load verifications here. Remove mock data. -->
-        </tbody>
-      </table>
-
-      <h3>Service Management</h3>
-      <form method="POST" action="" style="margin-bottom: 20px;">
-        <input type="hidden" name="add_service" value="1">
-        <label for="service_name">Service Name:</label>
-        <input type="text" id="service_name" name="service_name" required>
-        <label for="service_desc">Description:</label>
-        <input type="text" id="service_desc" name="service_desc" required>
-        <button type="submit">Add Service</button>
-      </form>
-      <?php if ($message) { echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>'; } ?>
-      <table>
-        <thead>
-          <tr><th>Name</th><th>Description</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          <?php foreach ($services as $service): ?>
-          <tr>
-            <td><?= htmlspecialchars($service['name']) ?></td>
-            <td><?= htmlspecialchars($service['description']) ?></td>
-            <td>
-              <form method="POST" style="display:inline;">
-                <input type="hidden" name="delete_service_id" value="<?= $service['id'] ?>">
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this service?');">Delete</button>
-              </form>
-            </td>
-          </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-
-      <h3>Booking Management</h3>
-      <?php if ($message) { echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>'; } ?>
-      <table>
-        <thead>
-          <tr><th>Service</th><th>Customer</th><th>Provider</th><th>Date</th><th>Status</th><th>Actions</th></tr>
-        </thead>
-        <tbody>
-          <?php foreach ($provider_approved_bookings as $row): ?>
-          <tr>
-            <td><?= htmlspecialchars($row['service_name']) ?></td>
-            <td><?= htmlspecialchars($row['customer_name']) ?></td>
-            <td><?= htmlspecialchars($row['provider_name']) ?></td>
-            <td><?= htmlspecialchars($row['service_date']) ?></td>
-            <td><?= htmlspecialchars($row['status']) ?></td>
-            <td>
-              <form method="POST" style="display:inline;">
-                <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
-                <button type="submit" name="action" value="approve">Approve</button>
-              </form>
-              <form method="POST" style="display:inline;">
-                <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
-                <button type="submit" name="action" value="reject">Reject</button>
-              </form>
-            </td>
-          </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-
-      <h3>All Approved Bookings</h3>
-      <table>
-        <thead>
-          <tr><th>Service</th><th>Customer</th><th>Provider</th><th>Date</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          <?php foreach ($all_approved_bookings as $row): ?>
-          <tr>
-            <td><?= htmlspecialchars($row['service_name']) ?></td>
-            <td><?= htmlspecialchars($row['customer_name']) ?></td>
-            <td><?= htmlspecialchars($row['provider_name']) ?></td>
-            <td><?= htmlspecialchars($row['service_date']) ?></td>
-            <td><?= htmlspecialchars($row['status']) ?></td>
-          </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-
-      <h3>Data Export</h3>
-      <button>Download Providers CSV</button>
-      <button>Download Bookings CSV</button>
-      </div>
+  <div class="sidebar">
+    <h2>GharSewa</h2>
+    <nav>
+      <ul>
+        <li><a href="#overview">Dashboard</a></li>
+        <li><a href="#user">Users</a></li>
+        <li><a href="#verify">Verifications</a></li>
+        <li><a href="#booking">Bookings</a></li>
+        <li><a href="#export">Export</a></li>
+      </ul>
+    </nav>
+    <div style="margin-top: 30px;">
+      <a href="index.html" class="logout-btn">Logout</a>
     </div>
   </div>
+  <div class="main-content">
+  <header>
+    <h1>Welcome to GharSewa Admin Dashboard</h1>
+  </header>
+  <div class="container">
+  <h2>Dashboard Overview</h2>
+  <div class="stats-grid">
+    <div class="card">👤 Users<br><strong><?= $total_users ?></strong></div>
+    <div class="card">🧑‍🔧 Providers<br><strong><?= $total_providers ?></strong></div>
+    <div class="card">📦 Bookings<br><strong><?= $total_bookings ?></strong></div>
+    <div class="card">✅ Active Services<br><strong><?= $total_services ?></strong></div>
+    <div class="card">⏳ Pending Verifications<br><strong><?= $pending_verifications ?></strong></div>
+  </div>
+
+  <h3>User Management</h3>
+  <table>
+    <thead>
+      <tr><th>Username</th><th>Email</th><th>Role</th><th>Registered At</th></tr>
+    </thead>
+    <tbody>
+      <?php foreach ($users as $user): ?>
+      <tr>
+        <td><?= htmlspecialchars($user['username']) ?></td>
+        <td><?= htmlspecialchars($user['email']) ?></td>
+        <td><?= htmlspecialchars($user['role']) ?></td>
+        <td><?= htmlspecialchars($user['created_at']) ?></td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+
+  <h3>Provider Verifications</h3>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Documents</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <!-- Dynamically load verifications here. Remove mock data. -->
+    </tbody>
+  </table>
+
+  <h3>Service Management</h3>
+  <form method="POST" action="" style="margin-bottom: 20px;">
+    <input type="hidden" name="add_service" value="1">
+    <label for="service_name">Service Name:</label>
+    <input type="text" id="service_name" name="service_name" required>
+    <label for="service_desc">Description:</label>
+    <input type="text" id="service_desc" name="service_desc" required>
+    <button type="submit">Add Service</button>
+  </form>
+  <?php if ($message) { echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>'; } ?>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Description</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <?php foreach ($services as $service): ?>
+      <tr>
+        <td><?= htmlspecialchars($service['name']) ?></td>
+        <td><?= htmlspecialchars($service['description']) ?></td>
+        <td>
+          <form method="POST" style="display:inline;">
+            <input type="hidden" name="delete_service_id" value="<?= $service['id'] ?>">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this service?');">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+
+  <h3>Booking Management</h3>
+  <?php if ($message) { echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>'; } ?>
+  <table>
+    <thead>
+      <tr><th>Service</th><th>Customer</th><th>Provider</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <?php foreach ($provider_approved_bookings as $row): ?>
+      <tr>
+        <td><?= htmlspecialchars($row['service_name']) ?></td>
+        <td><?= htmlspecialchars($row['customer_name']) ?></td>
+        <td><?= htmlspecialchars($row['provider_name']) ?></td>
+        <td><?= htmlspecialchars($row['service_date']) ?></td>
+        <td><?= htmlspecialchars($row['status']) ?></td>
+        <td>
+          <form method="POST" style="display:inline;">
+            <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
+            <button type="submit" name="action" value="approve">Approve</button>
+          </form>
+          <form method="POST" style="display:inline;">
+            <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
+            <button type="submit" name="action" value="reject">Reject</button>
+          </form>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+
+  <h3>All Approved Bookings</h3>
+  <table>
+    <thead>
+      <tr><th>Service</th><th>Customer</th><th>Provider</th><th>Date</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <?php foreach ($all_approved_bookings as $row): ?>
+      <tr>
+        <td><?= htmlspecialchars($row['service_name']) ?></td>
+        <td><?= htmlspecialchars($row['customer_name']) ?></td>
+        <td><?= htmlspecialchars($row['provider_name']) ?></td>
+        <td><?= htmlspecialchars($row['service_date']) ?></td>
+        <td><?= htmlspecialchars($row['status']) ?></td>
+      </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+
+  <h3>Data Export</h3>
+  <button>Download Providers CSV</button>
+  <button>Download Bookings CSV</button>
+</div>
+</div>
 </body>
 </html>
