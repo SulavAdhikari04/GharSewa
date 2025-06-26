@@ -38,8 +38,8 @@ GharSewa is a web-based platform for booking reliable home services in Kathmandu
 - CSS and images for UI styling
 
 ## Contact
-- Email: support@gharsewa.com
-- Phone: +977-9800000000
+- Email: sulavadhikari69@gmail.com
+- Phone: +977-9810029888
 
 ---
 © 2025 GharSewa. All rights reserved.
