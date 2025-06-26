@@ -54,20 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>Login - GharSewa</title>
-  <link rel="stylesheet" href="home.css">
-</head>
-<body>
-  <header>
-    <div class="container">
-      <a href="home.php"></s><h1>GharSewa </h1></a>
-    </div>
-  </header>
+<?php include '../components/Header.php'; ?>
   <section id="login" class="login-section">
     <h3>Login</h3>
     <form id="login-form" method="POST" action="">
@@ -79,10 +66,7 @@ $conn->close();
 
       <button type="submit">Login</button>
     </form>
-    <p style="color: <?= strpos($message, 'success') !== false ? 'green' : 'red' ?>; margin-top: 10px;">
-      <?= htmlspecialchars($message) ?>
-    </p>
+    <?php include '../components/Alert.php'; ?>
     <p>Don't have an account? <a href="register.php">Register here</a></p>
   </section>
-</body>
-</html>
+<?php include '../components/Footer.php'; ?>

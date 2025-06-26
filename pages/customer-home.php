@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>GharSewa - Home Services at Your Doorstep</title>
-  <link rel="stylesheet" href="home.css">
-</head>
-<body>
-  <header>
-    <div class="container">
-      <h1>GharSewa</h1>
-      <nav>
-        <a href="#services">Services</a>
-        <a href="#booking">Book Now</a>
-        <a href="#contact">Contact</a>
-        <a href="login.php" class="btn-link">Login</a>
-        <a href="register.php" class="btn-link">Register</a>
-      </nav>
-    </div>
-  </header>
+<?php include '../components/Header.php'; ?>
 
   <section class="hero">
     <h2>Reliable Home Services in Kathmandu</h2>
     <p>Book plumbers, electricians, cleaners & more with just a few clicks.</p>
-    <a href="login.php" class="cta-btn">Book a Service</a>
+    <a href="book-service.php" class="cta-btn">Book a Service</a>
   </section>
 
   <section class="doorstep">
@@ -116,41 +95,27 @@
     </div>
   </section>
 
-
   <section class="testimonials">
     <h3>What Our Customers Say</h3>
     <div class="card">"Great service and quick response!" - Aayush</div>
     <div class="card">"Highly recommend GharSewa!" - Pratiksha</div>
   </section>
 
-  <footer id="contact" class="footer">
-    <div class="footer-container">
-      <div class="footer-column">
-        <h4>GharSewa</h4>
-        <p>Reliable home services in Kathmandu, Lalitpur & Bhaktapur.</p>
-      </div>
-      <div class="footer-column">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#booking">Book Now</a></li>
-          <li><a href="login.php">Login</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Contact Us</h4>
-        <p>Email: support@gharsewa.com</p>
-        <p>Phone: +977-9800000000</p>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 GharSewa. All rights reserved.</p>
-    </div>
-  </footer>
-</body>
-</html>
+<?php include '../components/Footer.php'; ?>
+<script>
+  const profileIcon = document.getElementById("profile-icon");
+  const profileTray = document.getElementById("profile-tray");
+
+  profileIcon.addEventListener("click", () => {
+    profileTray.style.display = profileTray.style.display === "none" ? "block" : "none";
+  });
+
+  // Optional: Hide tray when clicking outside
+  window.addEventListener("click", (e) => {
+    if (!e.target.closest(".profile-menu")) {
+      profileTray.style.display = "none";
+    }
+  });
+</script>
+
+</rewritten_file>

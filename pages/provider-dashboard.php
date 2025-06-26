@@ -241,6 +241,195 @@ if ($stmt->fetch()) {
 }
 $stmt->close();
 ?>
+<?php include '../components/Header.php'; ?>
+<div class="layout">
+  <?php include '../components/SidebarProvider.php'; ?>
+  <div class="main-content">
+    <header>
+      <h1 class="headhead">Welcome, Provider</h1>
+    </header>
+    <section id="overview">
+      <h2>Dashboard Overview</h2>
+      <div class="stats-grid">
+        <div class="card">
+          <div class="card-title">Bookings Received</div>
+          <div class="card-value"><?= $bookings_received ?></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Services Offered</div>
+          <div class="card-value"><?= $services_offered ?></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Pending Requests</div>
+          <div class="card-value"><?= $pending_requests ?></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Total Earnings</div>
+          <div class="card-value">Rs. <?= number_format($total_earnings, 2) ?></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bookings">
+      <h3>Manage Bookings</h3>
+      <?php if ($message) { echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>'; } ?>
+      <table>
+        <thead>
+          <tr><th>Customer</th><th>Service</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        <?php foreach ($customer_requests as $row): ?>
+          <tr>
+            <td><?= htmlspecialchars($row['customer_name']) ?></td>
+            <td><?= htmlspecialchars($row['service_name']) ?></td>
+            <td><?= htmlspecialchars($row['service_date']) ?></td>
+            <td>
+              <span class="status-badge status-pending-provider">Waiting for Provider</span>
+            </td>
+            <td>
+              <form method="POST" style="display:inline;">
+                <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
+                <button type="submit" name="action" value="approve">Approve</button>
+              </form>
+              <form method="POST" style="display:inline;">
+                <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
+                <button type="submit" name="action" value="reject">Reject</button>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="services">
+      <h3>My Services</h3>
+      <form method="POST" action="" style="margin-bottom: 20px;">
+        <label for="add_service_id">Add a Service:</label>
+        <select id="add_service_id" name="add_service_id" required>
+          <option value="">Select Service</option>
+          <?php foreach ($all_services as $service): ?>
+            <option value="<?= $service['id'] ?>"><?= htmlspecialchars($service['name']) ?></option>
+          <?php endforeach; ?>
+        </select>
+        <label for="service_price">Price:</label>
+        <input type="number" step="0.01" id="service_price" name="service_price" required>
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability" name="availability" placeholder="e.g. Mon-Fri, 9am-5pm" required>
+        <button type="submit">Add Service</button>
+      </form>
+      <?php if ($message) { echo '<p style="color: green;">' . htmlspecialchars($message) . '</p>'; } ?>
+      <table class="services-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Service Area</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($my_services as $service): ?>
+          <tr>
+            <td><?= htmlspecialchars($service['name']) ?></td>
+            <td>Rs. <?= htmlspecialchars($service['price']) ?></td>
+            <td><?= htmlspecialchars($service['availability']) ?></td>
+            <td><?= htmlspecialchars($service['service_area']) ?></td>
+            <td>
+              <form method="POST" style="display:inline;">
+                <input type="hidden" name="remove_service_id" value="<?= $service['service_id'] ?>">
+                <button type="submit" onclick="return confirm('Are you sure you want to remove this service?');">Remove</button>
+              </form>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="customers">
+      <h3>Customers Served</h3>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Service</th></tr>
+        </thead>
+        <tbody>
+          <!-- Dynamically load customers here. Remove mock data. -->
+        </tbody>
+      </table>
+    </section>
+
+    <section id="accepted-bookings">
+      <h3>Bookings</h3>
+      <table>
+        <thead>
+          <tr><th>Customer</th><th>Service</th><th>Date</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <?php foreach ($accepted_bookings as $row): ?>
+            <tr>
+              <td><?= htmlspecialchars($row['customer_name']) ?></td>
+              <td><?= htmlspecialchars($row['service_name']) ?></td>
+              <td><?= htmlspecialchars($row['service_date']) ?></td>
+              <td>
+                <?php
+                  $status = $row['status'];
+                  $statusClass = '';
+                  switch ($status) {
+                    case 'pending_provider':
+                      $statusClass = 'status-badge status-pending-provider';
+                      $statusText = 'Waiting for Provider';
+                      break;
+                    case 'pending_admin':
+                      $statusClass = 'status-badge status-pending-admin';
+                      $statusText = 'Waiting for Admin';
+                      break;
+                    case 'confirmed':
+                      $statusClass = 'status-badge status-confirmed';
+                      $statusText = 'Confirmed';
+                      break;
+                    case 'rejected_by_provider':
+                      $statusClass = 'status-badge status-rejected';
+                      $statusText = 'Rejected by Provider';
+                      break;
+                    case 'rejected_by_admin':
+                      $statusClass = 'status-badge status-rejected';
+                      $statusText = 'Rejected by Admin';
+                      break;
+                    default:
+                      $statusClass = 'status-badge';
+                      $statusText = ucfirst($status);
+                  }
+                ?>
+                <span class="<?= $statusClass ?>"><?= $statusText ?></span>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="reviews">
+      <h3>Customer Reviews</h3>
+      <table>
+        <thead>
+          <tr><th>Customer</th><th>Service</th><th>Rating</th><th>Comment</th></tr>
+        </thead>
+        <tbody>
+          <!-- Dynamically load reviews here. Remove mock data. -->
+        </tbody>
+      </table>
+    </section>
+
+    <section id="profile">
+      <h3>My Profile</h3>
+      <div id="profile-view">
+        <p><strong>Username:</strong> <span id="view-username"><?= htmlspecialchars($provider_info['username']) ?></span></p>
+        <p><strong>Phone:</strong> <span id="view-phone"><?= htmlspecialchars($provider_info['phone']) ?></span></p>
+        <?php if (!empty($profile['profile_picture'])): ?>
+          <img src="<?= htmlspecialchars($profile['profile_picture']) ?>" alt="Profile Picture" style="max-width:100px; border-radius:50%; margin-bottom:10px;">
+        <?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

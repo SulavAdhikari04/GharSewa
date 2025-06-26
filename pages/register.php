@@ -51,26 +51,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <title>Register - GharSewa</title>
-  <link rel="stylesheet" href="register.css" />
-</head>
-<body>
+<?php include '../components/Header.php'; ?>
   <div class="login-container">
     <h2>Register</h2>
-    <!-- Show Error Message Here -->
-    <!-- ✅ Show Error Messages -->
-      <?php
-        if (!empty($error)) {
+    <?php
+      if (!empty($error)) {
         foreach ($error as $err) {
             echo '<div class="alert alert-danger">' . $err . '</div>';
-          }
         }
-      ?>
+      }
+    ?>
+    <?php include '../components/Alert.php'; ?>
     <form id="register-form" method="POST" action="">
       <label for="name">Full Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required />
@@ -97,11 +88,6 @@ $conn->close();
 
       <button type="submit">Register</button>
     </form>
-    <p id="register-message" style="margin-top: 10px; color: <?= strpos(
-      htmlspecialchars($message), 'success') !== false ? 'green' : 'red' ?>;">
-      <?= htmlspecialchars($message) ?>
-    </p>
     <p>Already have an account? <a href="login.php">Login here</a></p>
   </div>
-</body>
-</html>
+<?php include '../components/Footer.php'; ?>
