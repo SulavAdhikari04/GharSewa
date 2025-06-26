@@ -1,0 +1,280 @@
+/* Reset and base styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  /* Layout wrapper */
+  .layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 180px;
+    background-color: #004d40;
+    color: white;
+    padding: 20px;
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+    font-size: 24px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+  }
+  
+  .sidebar li {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+  }
+  
+  .sidebar a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Main content */
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  /* Header */
+  header {
+    background: #00796b;
+    color: white;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  
+  /* Dashboard Stats */
+  .stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    flex: 1 1 140px;
+    padding: 15px;
+    background: #e0f2f1;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  thead {
+    background-color: #00796b;
+    color: white;
+  }
+  
+  /* Buttons */
+  button {
+    padding: 8px 14px;
+    margin-top: 10px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #004d40;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #e53935;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c62828;
+  }
+
+/* Profile Form Styling */
+#profile-form {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+#profile-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+#profile-form input[type="text"],
+#profile-form input[type="email"],
+#profile-form input[type="tel"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+#profile-form input:focus {
+  border-color: #00796b;
+  outline: none;
+}
+
+#profile-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Profile Section Styling */
+#profile {
+  background-color: #fefefe;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+#profile h3 {
+  text-align: center;
+  color: #00796b;
+  margin-bottom: 25px;
+}
+
+#profile-view p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+#profile-view strong {
+  color: #00796b;
+}
+
+#edit-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 8px 16px;
+  font-size: 15px;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#edit-btn:hover {
+  background-color: #004d40;
+}
+
+/* No Bookings Message Styling */
+.no-bookings-message {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+  border-radius: 10px;
+  border: 2px dashed #4caf50;
+  margin: 20px 0;
+  color: #2e7d32;
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+  overflow: hidden;
+}
+
+.no-bookings-message::before {
+  content: "📋";
+  font-size: 48px;
+  display: block;
+  margin-bottom: 15px;
+  opacity: 0.7;
+}
+
+.no-bookings-message::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.no-bookings-message:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Footer */
+.footer {
+  background-color: #004d40;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.footer-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer a {
+  color: #b2dfdb;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,274 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 40px;
+  }
+  
+  .container {
+    max-width: 600px;
+    background: white;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #00796b;
+  }
+  
+  form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 500;
+  }
+  
+  form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  form button {
+    margin-top: 20px;
+    background-color: #00796b;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #004d40;
+  }
+  
+  /* Provider Cards Section */
+  .card-list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .booking-card {
+    background: #e0f7fa;
+    border-left: 5px solid #00796b;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  
+  .booking-card h4 {
+    margin: 0 0 10px;
+    color: #00796b;
+  }
+  
+  /* Selected Provider Highlight */
+  .booking-card.selected {
+    border: 2px solid #00796b;
+    background-color: #b2ebf2;
+  }
+  
+  /* Provider card button */
+  .booking-card button {
+    margin-top: 10px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .booking-card button:hover {
+    background-color: #004d40;
+  }
+
+#provider-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+#provider-section label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #004d40;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.text-logo {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #00796b;
+  text-decoration: none;
+  margin: 20px;
+}
+
+.text-logo{
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+/* Provider selection table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+table th, table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+table th {
+  background: #f7f7f7;
+  font-weight: 600;
+  color: #333;
+}
+table tr:hover {
+  background: #f0f8ff;
+}
+
+/* Provider radio button */
+table input[type="radio"] {
+  transform: scale(1.2);
+}
+
+/* Book button */
+button[type="submit"] {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+button[type="submit"]:hover {
+  background: #0056b3;
+}
+
+/* Confirmation message */
+.booking-confirmation, .container > p[style*="color: green"] {
+  background: #e6ffed;
+  color: #207245;
+  border: 1px solid #b2f2c8;
+  padding: 12px 18px;
+  border-radius: 5px;
+  margin-bottom: 18px;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* Form fields */
+form label {
+  display: block;
+  margin-top: 14px;
+  font-weight: 500;
+}
+form input, form select, form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+form textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  table th, table td {
+    padding: 10px 6px;
+  }
+  table th {
+    background: #f7f7f7;
+  }
+}
+
+.provider-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+.provider-card {
+  background: #e0f7fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 18px 20px 14px 20px;
+  border: 2px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: border 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.provider-card.selected, .provider-card:hover {
+  border: 2px solid #007bff;
+  box-shadow: 0 4px 16px rgba(0,123,255,0.08);
+}
+.provider-card input[type="radio"] {
+  margin-right: 10px;
+  accent-color: #007bff;
+  transform: scale(1.2);
+}
+.provider-card .provider-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+.provider-card .provider-price {
+  color: #007bff;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.provider-card .provider-availability {
+  color: #555;
+  font-size: 0.97rem;
+  margin-bottom: 2px;
+}
+.provider-card .provider-radio {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+@media (max-width: 600px) {
+  .provider-cards {
+    grid-template-columns: 1fr;
+  }
+}

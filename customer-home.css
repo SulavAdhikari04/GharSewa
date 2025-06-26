@@ -1,0 +1,468 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f8f8f8;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  header {
+    background-color: #00796b;
+    color: white;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+nav a {
+  margin-left: 15px;
+  color: white;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  background-color: #00796b;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #004d40;
+  color: #ffffff;
+}
+  
+  .hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to right, #009688, #004d40);
+    color: white;
+  }
+  
+  .cta-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #00796b;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .services {
+    padding: 40px 20px;
+    background-color: #e0f2f1;
+    text-align: center;
+  }
+  
+  .service-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .card {
+    padding: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 150px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .booking-form {
+    padding: 40px 20px;
+    background-color: #ffffff;
+  }
+  
+  .booking-form form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .booking-form input,
+  .booking-form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .booking-form button {
+    padding: 10px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #00796b;
+    color: white;
+  }
+
+/* Login Section */
+.login-section {
+  padding: 40px 20px;
+  background-color: #f0f0f0;
+}
+
+.login-section h3 {
+  text-align: center;
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+#login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+#login-form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+#login-form input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#login-form button {
+  padding: 10px;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#login-form button:hover {
+  background-color: #004d40;
+}
+
+/* Enhanced Hero Section */
+.hero {
+  background: linear-gradient(to right, rgba(0, 121, 107, 0.9), rgba(0, 77, 64, 0.9)),
+              url('https://images.unsplash.com/photo-1581578017424-6dc9d4c801a6') center/cover no-repeat;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* CTA Button */
+.cta-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 24px;
+  background-color: #ff5722;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #e64a19;
+}
+
+/* Card Hover Effect */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 40px 20px;
+  background-color: #f1f8f7;
+  text-align: center;
+}
+
+.testimonials h3 {
+  margin-bottom: 20px;
+  color: #00796b;
+}
+
+.testimonials .card {
+  display: inline-block;
+  background: white;
+  margin: 10px;
+  padding: 20px;
+  width: 300px;
+  height: 150px;
+  vertical-align: top;
+}
+/* How It Works Section */
+.how-it-works {
+    padding: 40px 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+  }
+  
+  .how-it-works h2 {
+    color: #00796b;
+    margin-bottom: 20px;
+  }
+  
+  .steps {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .step {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 200px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  /* Stats Section */
+  .stats {
+    padding: 40px 20px;
+    background: #004d40;
+    color: white;
+    text-align: center;
+  }
+  
+  .stats h2 {
+    margin-bottom: 20px;
+  }
+  
+  .stat-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .stat {
+    background: #00695c;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+    font-size: 16px;
+  }
+  /* Doorstep Section */
+.doorstep {
+    background-color: #e0f2f1;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  
+  .doorstep-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .doorstep-content i {
+    color: #00796b;
+  }
+  
+  .doorstep-content h3 {
+    margin-bottom: 8px;
+    color: #004d40;
+  }
+
+.doorstep-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  
+  .doorstep-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 200px;
+  }
+  
+  .doorstep-card img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+  }
+  
+  .doorstep-card h4 {
+    margin: 10px 0;
+    color: #00796b;
+  }
+  .stats {
+    padding: 50px 20px;
+    background: linear-gradient(to right, #005c97, #363795);
+    color: white;
+    text-align: center;
+  }
+  
+  .stat-cards.extended {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .stat {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .stat i {
+    color: #00e5ff;
+    margin-bottom: 10px;
+  }
+  
+  .stat h4 {
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  
+  .stat p {
+    font-size: 14px;
+    color: #cfd8dc;
+  }
+  /* Footer */
+.footer {
+    background-color: #004d40;
+    color: white;
+    padding: 40px 20px 20px;
+    font-size: 14px;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .footer-column h4 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-column ul li a {
+    color: #b2dfdb;
+    text-decoration: none;
+  }
+  
+  .footer-column ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-icons a {
+    color: white;
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+  }
+.profile-menu {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+#profile-icon {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#profile-icon:hover {
+  transform: scale(1.1);
+}
+
+.dropdown-tray {
+  position: absolute;
+  right: 0;
+  top: 35px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  min-width: 150px;
+}
+
+.dropdown-tray a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.dropdown-tray a:hover {
+  background-color: #f0f0f0;
+}
