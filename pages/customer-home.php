@@ -1,4 +1,5 @@
 <?php
+require_once '../components/SessionManager.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
