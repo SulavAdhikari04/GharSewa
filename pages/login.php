@@ -1,11 +1,25 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+session_start();
 }
 // Auto-login using cookie
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
-    $_SESSION['user_id'] = $_COOKIE['user_id'];
-    // You may want to fetch and set other session variables from DB here
+    $conn = new mysqli("localhost", "root", "", "gharsewa");
+    if (!$conn->connect_error) {
+        $stmt = $conn->prepare("SELECT id, username, role FROM users WHERE id = ?");
+        $stmt->bind_param("i", $_COOKIE['user_id']);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows === 1) {
+            $stmt->bind_result($id, $username, $role);
+            $stmt->fetch();
+            $_SESSION['user_id'] = $id;
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
+        }
+        $stmt->close();
+        $conn->close();
+    }
 }
 // Database connection
 $conn = new mysqli("localhost", "root", "", "gharsewa");
@@ -16,6 +30,9 @@ if ($conn->connect_error) {
 $message = "";
 if (isset($_GET['registered'])) {
     $message = "Registration successful! Please log in.";
+}
+if (isset($_GET['expired'])) {
+    $message = "Your session has expired. Please log in again.";
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

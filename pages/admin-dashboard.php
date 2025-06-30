@@ -2,8 +2,9 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+require_once '../components/SessionManager.php';
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+session_start();
 }
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
