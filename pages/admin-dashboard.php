@@ -3,6 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../components/SessionManager.php';
+require_once '../components/Database.php';
+
+// Add cookies
+setcookie('admin_dashboard_visited', 'true', time() + (86400 * 30), "/");
+setcookie('admin_user_id', $_SESSION['user_id'], time() + (86400 * 30), "/");
+
 if (session_status() === PHP_SESSION_NONE) {
 session_start();
 }
@@ -11,7 +17,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "gharsewa");
+$conn = getDBConnection();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -188,7 +194,7 @@ $pending_verifications = 0;
       </ul>
     </nav>
     <div style="margin-top: 30px;">
-      <a href="index.html" class="logout-btn">Logout</a>
+      <a href="../components/Logout.php" class="logout-btn">Logout</a>
     </div>
   </div>
   <div class="main-content">

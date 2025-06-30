@@ -1,5 +1,11 @@
 <?php
 require_once '../components/SessionManager.php';
+require_once '../components/Database.php';
+
+// Add  cookies
+setcookie('customer_dashboard_visited', 'true', time() + (86400 * 30), "/");
+setcookie('customer_preferred_service', 'plumbing', time() + (86400 * 30), "/");
+setcookie('customer_user_id', $_SESSION['user_id'], time() + (86400 * 30), "/");
 
 // Check if user is logged in and is a customer
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'customer') {
@@ -7,10 +13,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "gharsewa");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = getDBConnection();
 
 $user_id = $_SESSION['user_id'];
 $bookings = [];
@@ -101,7 +104,7 @@ if ($stmt->fetch()) {
 }
 $stmt->close();
 
-$conn->close();
+closeDBConnection($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,7 +128,7 @@ $conn->close();
         </ul>
       </nav>
       <div style="margin-top: 30px;">
-        <a href="index.html" class="logout-btn">Logout</a>
+        <a href="../components/Logout.php" class="logout-btn">Logout</a>
       </div>
     </div>
 

@@ -16,7 +16,7 @@
         <a href="#booking">Book Now</a>
         <a href="#contact">Contact</a>
         <a href="login.php" class="btn-link">Login</a>
-        <a href="register.php" class="btn-link">Register</a>
+        <!-- <a href="register.php" class="btn-link">Register</a> -->
       </nav>
     </div>
   </header>

@@ -1,10 +1,11 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-session_start();
+    session_start();
 }
+require_once '../components/Database.php';
 // Auto-login using cookie
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
-    $conn = new mysqli("localhost", "root", "", "gharsewa");
+    $conn = getDBConnection();
     if (!$conn->connect_error) {
         $stmt = $conn->prepare("SELECT id, username, role FROM users WHERE id = ?");
         $stmt->bind_param("i", $_COOKIE['user_id']);
@@ -18,11 +19,11 @@ if (!isset($_SESSION['user_id']) && isset($_COOKIE['user_id'])) {
             $_SESSION['role'] = $role;
         }
         $stmt->close();
-        $conn->close();
+        closeDBConnection($conn);
     }
 }
 // Database connection
-$conn = new mysqli("localhost", "root", "", "gharsewa");
+$conn = getDBConnection();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -80,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 }
-$conn->close();
+closeDBConnection($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

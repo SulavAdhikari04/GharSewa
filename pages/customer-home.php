@@ -1,5 +1,11 @@
 <?php
 require_once '../components/SessionManager.php';
+require_once '../components/Database.php';
+
+// Add cookies
+setcookie('customer_home_visited', 'true', time() + (86400 * 30), "/");
+setcookie('customer_user_id', $_SESSION['user_id'], time() + (86400 * 30), "/");
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -29,7 +35,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
           <i class="fas fa-user-circle" id="profile-icon"></i>
           <div class="dropdown-tray" id="profile-tray" style="display: none;">
             <a href="customer-dashboard.php">Dashboard</a>
-            <a href="home.php">Logout</a>
+            <a href="../components/Logout.php">Logout</a>
           </div>
         </div>
       </nav>
@@ -150,7 +156,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
           <li><a href="#services">Services</a></li>
           <li><a href="#booking">Book Now</a></li>
           <li><a href="customer-dashboard.php">Dashboard</a></li>
-          <li><a href="home.php">Logout</a></li>
+          <li><a href="../components/Logout.php">Logout</a></li>
         </ul>
       </div>
       <div class="footer-column">

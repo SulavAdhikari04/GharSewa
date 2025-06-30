@@ -2,11 +2,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+require_once '../components/Database.php';
 // Database connection
-$conn = new mysqli("localhost", "root", "", "gharsewa");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = getDBConnection();
 
 $message = "";
 
@@ -52,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 }
-$conn->close();
+closeDBConnection($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

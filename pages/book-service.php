@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../components/SessionManager.php';
+require_once '../components/Database.php';
 if (session_status() === PHP_SESSION_NONE) {
 session_start();
 }
@@ -10,11 +11,13 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
     header('Location: login.php');
     exit();
 }
-$conn = new mysqli("localhost", "root", "", "gharsewa");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$conn = getDBConnection();
 $message = "";
+
+// Add cookies
+setcookie('book_service_visited', 'true', time() + (86400 * 30), "/");
+setcookie('book_service_count', ($_COOKIE['book_service_count'] ?? 0) + 1, time() + (86400 * 30), "/");
+setcookie('book_service_user_id', $_SESSION['user_id'], time() + (86400 * 30), "/");
 
 // Fetch services for dropdown
 $services = [];
@@ -63,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book_with_provider']))
     }
     $stmt->close();
 }
-$conn->close();
+closeDBConnection($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

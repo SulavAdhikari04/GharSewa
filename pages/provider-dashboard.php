@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../components/SessionManager.php';
+require_once '../components/Database.php';
 $all_services = [];
 if (session_status() === PHP_SESSION_NONE) {
 session_start();
@@ -12,13 +13,17 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'provider') {
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "gharsewa");
+$conn = getDBConnection();
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 $provider_user_id = $_SESSION['user_id'];
 $message = '';
+
+// Add demonstration cookies
+setcookie('provider_dashboard_visited', 'true', time() + (86400 * 30), "/");
+setcookie('provider_user_id', $_SESSION['user_id'], time() + (86400 * 30), "/");
 
 // Handle Approve/Reject actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['booking_id'], $_POST['action'])) {
@@ -268,7 +273,7 @@ $stmt->close();
         </ul>
       </nav>
       <div style="margin-top: 30px;">
-        <a href="index.html" class="logout-btn">Logout</a>
+        <a href="../components/Logout.php" class="logout-btn">Logout</a>
       </div>
     </div>
 
